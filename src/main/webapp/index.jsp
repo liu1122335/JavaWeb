@@ -163,7 +163,7 @@
     </nav>
     <!-- 登录按钮 -->
     <div class="login-icon" id="loginIcon" onclick="redirectToLogin()">
-        <img src="images/login-icon.png" alt="登录图标"> <!-- 这里需要将图标路径更改为实际路径 -->
+        <img src="images/user_icon.png" alt="登录图标"> <!-- 这里需要将图标路径更改为实际路径 -->
         <div class="login-text" id="loginText">登录</div>
     </div>
 </header>

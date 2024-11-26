@@ -57,5 +57,25 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UpdateUsernameServlet</servlet-name>
+        <servlet-class>com.example.web.servlet.UpdateUsernameServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateUsernameServlet</servlet-name>
+        <url-pattern>/updateUsername</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdatePasswordServlet</servlet-name>
+        <servlet-class>com.example.web.servlet.UpdatePasswordServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdatePasswordServlet</servlet-name>
+        <url-pattern>/updatePassword</url-pattern>
+    </servlet-mapping>
+
 </web-app>
 

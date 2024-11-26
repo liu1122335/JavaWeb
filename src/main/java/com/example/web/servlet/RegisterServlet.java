@@ -27,7 +27,7 @@ public class RegisterServlet extends HttpServlet {
 
         try {
             // 加载数据库驱动
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             // 获取数据库连接
             Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
 

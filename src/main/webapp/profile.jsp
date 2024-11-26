@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -61,6 +61,41 @@
         .content {
             display: none; /* 隐藏所有内容 */
         }
+        .modal {
+            display: none; /* 默认隐藏 */
+            position: fixed; /* 固定位置 */
+            z-index: 1; /* 置于顶层 */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4); /* 背景半透明 */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
         footer {
             background: #9B2A2D;
             color: #fff;
@@ -81,16 +116,35 @@
     <div class="tab-container">
         <div class="tab active" onclick="showTab('profileInfo')">个人信息</div>
         <div class="tab" onclick="showTab('history')">历史记录</div>
+        <div class="tab" onclick="showTab('updateInfo')">修改密码</div>
         <div class="tab" onclick="logout()">登出</div> <!-- 修改为登出功能 -->
     </div>
 
     <!-- 内容部分 -->
     <div class="content active" id="profileInfo">
         <h2>个人信息</h2>
-        <p>用户名: <strong><%= session.getAttribute("username") != null ? session.getAttribute("username") : "未登录" %></strong></p>
+        <p>用户名:
+            <strong>
+                <span id="usernameDisplay"><%= session.getAttribute("username") != null ? session.getAttribute("username") : "未登录" %></span>
+            </strong>
+            <button onclick="showEditUsernameModal()">修改用户名</button>
+        </p>
         <p>账户: <strong><%= session.getAttribute("account") != null ? session.getAttribute("account") : "未登录" %></strong></p>
         <p>加入时间: <strong>2023-01-01</strong></p>
     </div>
+
+    <!-- 更改用户名的表单 -->
+    <div id="editUsernameModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditUsernameModal()">&times;</span>
+            <h2>更改用户名</h2>
+            <form action="UpdateUsernameServlet" method="post">
+                <input type="text" name="newUsername" placeholder="新用户名" required>
+                <input type="submit" value="确定">
+            </form>
+        </div>
+    </div>
+
 
     <div class="content" id="history">
         <h2>历史记录</h2>
@@ -103,7 +157,7 @@
 </div>
 
 <footer>
-    <p>&copy; 2023 历史文化遗产网站. 保留所有权利.</p>
+    <p>&copy; 2024 历史文化遗产网站. 保留所有权利.</p>
 </footer>
 
 <script>
@@ -126,6 +180,18 @@
         // 设置当前标签为活动状态
         document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add('active');
     }
+
+    // 显示更改用户名的弹出窗口
+    function showEditUsernameModal() {
+        document.getElementById('editUsernameModal').style.display = 'block';
+    }
+
+    // 关闭更改用户名的弹出窗口
+    function closeEditUsernameModal() {
+        document.getElementById('editUsernameModal').style.display = 'none';
+    }
+
+
 
     // 登出函数
     function logout() {

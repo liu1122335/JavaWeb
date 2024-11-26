@@ -41,6 +41,7 @@ public class LoginServlet extends HttpServlet {
             if (resultSet.next()) {
                 // 登录成功，设置用户状态
                 request.getSession().setAttribute("user", loginField); // 将用户名或账号存入会话
+                request.getSession().setAttribute("id",resultSet.getInt("id"));
                 request.getSession().setAttribute("username", resultSet.getString("username"));
                 request.getSession().setAttribute("account", resultSet.getString("account"));
                 response.sendRedirect("index.jsp"); // 修改为主页面的 URL
